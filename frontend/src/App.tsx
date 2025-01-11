@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./App.css";
-
+import DemoPage from "./components/payments/page";
 function App() {
   const URL = "/api/fetch-data";
   fetch(URL)
@@ -9,7 +9,11 @@ function App() {
     .then((data) => {
       console.log(data);
     });
-  return <>hello</>;
+  return (
+    <>
+      <DemoPage />
+    </>
+  );
 }
 
 export default App;

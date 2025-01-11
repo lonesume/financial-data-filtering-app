@@ -29,9 +29,17 @@ def handle_data():
     for element in elements :
         data = {}
 
-        print(element)
+        
         for key in keys:
-            data[key] = element[key]
+            try:
+              data[key] = element[key]
+              
+            except TypeError as e:
+                print("This is ",elements)
+                print(f"Error accessing element with key '{key}': {e}")
+    # Handle the error appropriately, possibly by assigning a default value or logging the issue.
+
+            # data[key] = element[key]
 
         statements.append(data)
             

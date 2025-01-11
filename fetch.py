@@ -23,21 +23,16 @@ def handle_data():
 
     fetch = requests.get(endpointFinModel)
     elements= fetch.json()
-   
-    # print(elements)
+
     keys = ['date','symbol','revenue','netIncome','grossProfit','eps','operatingIncome']
     statements =[]
     for element in elements :
         data = {}
-        f = open("printelement.json","w")
-        f.write(str(element))
-        f.close()
+
         print(element)
         for key in keys:
             data[key] = element[key]
-  
-    
-  
+
         statements.append(data)
             
     return statements

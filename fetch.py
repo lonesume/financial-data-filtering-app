@@ -22,14 +22,25 @@ def handle_data():
     finModelAPIEND= os.environ['FIN_MODEL_PREP_API_ENDPOINT']
 
     fetch = requests.get(endpointFinModel)
-    fetchData= fetch.json()
+    elements= fetch.json()
+   
+    # print(elements)
     keys = ['date','symbol','revenue','netIncome','grossProfit','eps','operatingIncome']
-    data = {}
-    for key in keys:
-        data[key] = fetchData[0][key]
-        
-    return data
-
+    statements =[]
+    for element in elements :
+        data = {}
+        f = open("printelement.json","w")
+        f.write(str(element))
+        f.close()
+        print(element)
+        for key in keys:
+            data[key] = element[key]
+  
+    
+  
+        statements.append(data)
+            
+    return statements
 
 
 

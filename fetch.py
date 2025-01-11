@@ -4,31 +4,19 @@ from dotenv import load_dotenv
 from typing import Union
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.requests import Request
 load_dotenv()
 
 finModelAPIKey= os.environ['FIN_MODEL_PREP_API']
 
 endpointFinModel=f"https://financialmodelingprep.com/api/v3/income-statement/AAPL?period=annual&apikey={finModelAPIKey}"
 
-
-
-
 app = FastAPI()
 
 
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
-
-
-
-# print("endpoint value:",endpointFinModel)
-@app.get("/")
+@app.get("/api/fetch-data")
 def handle_data():
 
     finModelAPIEND= os.environ['FIN_MODEL_PREP_API_ENDPOINT']
@@ -44,6 +32,6 @@ def handle_data():
 
 
 
-# print("This is:",data)
+
 
 

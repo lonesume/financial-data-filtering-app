@@ -1,12 +1,10 @@
-import { useState } from "react";
-
-import "./App.css";
 import DemoPage from "./components/payments/page";
+
 function App() {
   return (
-    <>
+    <div className="min-h-screen w-full">
       <DemoPage />
-    </>
+    </div>
   );
 }
 

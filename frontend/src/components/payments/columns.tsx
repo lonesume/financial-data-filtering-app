@@ -39,7 +39,6 @@ export const columns: ColumnDef<Statement>[] = [
     id: "select",
     header: ({ table }) => (
       <Checkbox
-        className="bg-red-200"
         checked={
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")

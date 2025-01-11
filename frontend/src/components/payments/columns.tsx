@@ -16,6 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DataTableColumnHeader } from "./column-header";
 
+export type Statement = {
+  date: string;
+  symbol: string;
+  revenue: number;
+  netIncome: number;
+  grossProfit: number;
+  eps: number;
+  operatingIncome: number;
+};
+
 // Define the shape of your data
 export type Payment = {
   id: string;
@@ -24,7 +34,7 @@ export type Payment = {
   email: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Statement>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -65,11 +75,11 @@ export const columns: ColumnDef<Payment>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
+            {/* <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
               Copy payment ID
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
@@ -79,35 +89,102 @@ export const columns: ColumnDef<Payment>[] = [
     },
   },
   {
-    accessorKey: "status", // Maps to `Payment.status`
-    header: "Status",
+    accessorKey: "symbol", // Maps to `Statement.symbol`
+    header: "Symbol",
   },
   {
-    accessorKey: "email", // Maps to `Payment.email`
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    // header: ({ column }) => (
-    //   <DataTableColumnHeader column={column} title="Email" />
-    // ),
+    accessorKey: "date", // Maps to `Statement.date`
+    // header: ({ column }) => {
+    //   return (
+    //     <Button
+    //       variant="ghost"
+    //       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+    //     >
+    //       Email
+    //       <ArrowUpDown className="ml-2 h-4 w-4" />
+    //     </Button>
+    //   );
+    // },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Date" />
+    ),
   },
   {
-    accessorKey: "amount", // Maps to `Payment.amount`
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "revenue",
+    // header: () => <div className="text-right">Revenue</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Revenue" />
+    ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
+      const revenue = parseFloat(row.getValue("revenue"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(amount);
+      }).format(revenue);
+
+      return <div className="text-right font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "netIncome",
+    // header: () => <div className="text-right">Revenue</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Net Income" />
+    ),
+    cell: ({ row }) => {
+      const revenue = parseFloat(row.getValue("netIncome"));
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(revenue);
+
+      return <div className="text-right font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "grossProfit",
+    // header: () => <div className="text-right">Revenue</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Gross Profit" />
+    ),
+    cell: ({ row }) => {
+      const revenue = parseFloat(row.getValue("grossProfit"));
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(revenue);
+
+      return <div className="text-right font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "eps",
+    // header: () => <div className="text-right">Revenue</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Eps" />
+    ),
+    cell: ({ row }) => {
+      const revenue = parseFloat(row.getValue("eps"));
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(revenue);
+
+      return <div className="text-right font-medium">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "operatingIncome",
+    // header: () => <div className="text-right">Revenue</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Operating Income" />
+    ),
+    cell: ({ row }) => {
+      const revenue = parseFloat(row.getValue("operatingIncome"));
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+      }).format(revenue);
 
       return <div className="text-right font-medium">{formatted}</div>;
     },

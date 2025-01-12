@@ -39,7 +39,7 @@ export default function DemoPage() {
     const queryString = params.toString();
     console.log(`HEYY THIS is :${queryString}`);
     const newUrl = `${BASE_URL}?${queryString}`;
-
+    setUrl(newUrl);
     fetch(newUrl)
       .then((res) => res.json())
       .then((resData) => {

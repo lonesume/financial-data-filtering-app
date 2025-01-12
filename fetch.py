@@ -29,9 +29,9 @@ app.add_middleware(
 
 
 @app.get("/api/fetch-data/")
-def handle_data(minRevenue: float = float('-inf'), maxRevenue: float = float('inf')
+def handle_data(minRevenue: float | None= float('-inf'), maxRevenue: float | None= float('inf')
 ):
-
+    print(f"this minRev{minRevenue}",f"this is maxRev{maxRevenue}")
     finModelAPIEND= os.environ['FIN_MODEL_PREP_API_ENDPOINT']
 
     fetch = requests.get(endpointFinModel)
@@ -74,7 +74,7 @@ def handle_data(minRevenue: float = float('-inf'), maxRevenue: float = float('in
     # maxRev =  391_034_999_999          
     
     filtered_statements = [statement for statement in statements if statement['revenue'] > minRevenue and statement['revenue'] < maxRevenue]
-    
+
     return filtered_statements
 
 

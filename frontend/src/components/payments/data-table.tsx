@@ -71,14 +71,14 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full">
       <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center">
-        <Input
+        {/* <Input
           placeholder="Filter emails..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

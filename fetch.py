@@ -58,11 +58,11 @@ def handle_data():
 
 
 
-app.mount("/assets", StaticFiles(directory="../frontend/dist/assets"), name="static")
+app.mount("/assets", StaticFiles(directory="./frontend/dist/assets"), name="static")
 
 # Serve frontend static files and handle client-side routing
 @app.get("/{full_path:path}")
 async def serve_frontend(full_path: str):
     if full_path.startswith("api/"):
         raise HTTPException(status_code=404, detail="Not found")
-    return FileResponse("../frontend/dist/index.html")
+    return FileResponse("./frontend/dist/index.html")

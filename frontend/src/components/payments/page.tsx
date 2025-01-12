@@ -5,7 +5,7 @@ import { DataTable } from "./data-table";
 export default function DemoPage() {
   const [data, setData] = useState([] as Statement[]);
 
-  const URL = "/api/fetch-data";
+  const URL = "/api/fetch-data/";
   useEffect(() => {
     fetch(URL)
       .then((res) => res.json())

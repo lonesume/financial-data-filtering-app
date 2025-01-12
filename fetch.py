@@ -1,3 +1,4 @@
+import json
 from fastapi.responses import FileResponse
 import requests
 import os 
@@ -27,13 +28,26 @@ app.add_middleware(
 
 
 
-@app.get("/api/fetch-data")
-def handle_data():
+@app.get("/api/fetch-data/")
+def handle_data(minRevenue: float = float('-inf'), maxRevenue: float = float('inf')
+):
 
     finModelAPIEND= os.environ['FIN_MODEL_PREP_API_ENDPOINT']
 
     fetch = requests.get(endpointFinModel)
-    elements= fetch.json()
+    elm = open("elements.json","r")
+    readingElm = elm.read()
+    jsonElm = json.loads(readingElm)
+    elm.close()
+    
+    elements = jsonElm
+    
+    
+    # elements= fetch.json()
+    # s = open("elements.json",'w')
+    # s.write(str(elements))
+    # s.close()
+
 
     keys = ['date','symbol','revenue','netIncome','grossProfit','eps','operatingIncome']
     statements =[]
@@ -54,8 +68,14 @@ def handle_data():
             # data[key] = element[key]
 
         statements.append(data)
-            
-    return statements
+        
+        
+    # minRev = 274_515_000_001
+    # maxRev =  391_034_999_999          
+    
+    filtered_statements = [statement for statement in statements if statement['revenue'] > minRevenue and statement['revenue'] < maxRevenue]
+    
+    return filtered_statements
 
 
 

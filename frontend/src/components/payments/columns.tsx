@@ -26,14 +26,6 @@ export type Statement = {
   operatingIncome: number;
 };
 
-// Define the shape of your data
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
 export const columns: ColumnDef<Statement>[] = [
   {
     id: "select",
@@ -61,9 +53,8 @@ export const columns: ColumnDef<Statement>[] = [
   {
     id: "actions", // Keep this column for custom rendering
     header: "Actions",
-    cell: ({ row }) => {
-      const payment = row.original;
-
+    cell: () => {
+      // { row }
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

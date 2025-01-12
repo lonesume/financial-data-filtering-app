@@ -8,6 +8,11 @@ export default function DemoPage() {
   const [data, setData] = useState([] as Statement[]);
   const [minRevenue, setMinRevenue] = useState("");
   const [maxRevenue, setMaxRevenue] = useState("");
+  const [minNetIncome, setMinNetIncome] = useState("");
+  const [maxNetIncome, setMaxNetIncome] = useState("");
+  const [minYear, setMinYear] = useState("");
+  const [maxYear, setMaxYear] = useState("");
+
   const [url, setUrl] = useState(BASE_URL);
 
   function filterData() {
@@ -17,6 +22,18 @@ export default function DemoPage() {
     }
     if (maxRevenue) {
       obj.maxRevenue = maxRevenue;
+    }
+    if (minNetIncome) {
+      obj.minNetIncome = minNetIncome;
+    }
+    if (maxNetIncome) {
+      obj.maxNetIncome = maxNetIncome;
+    }
+    if (minYear) {
+      obj.minYear = minYear;
+    }
+    if (maxYear) {
+      obj.maxYear = maxYear;
     }
     const params = new URLSearchParams(obj);
     const queryString = params.toString();
@@ -68,6 +85,44 @@ export default function DemoPage() {
             setMaxRevenue(e.target.value);
           }}
         />
+        <input
+          type="number"
+          placeholder="Minimum Net Income"
+          className="mt-10"
+          value={minNetIncome}
+          onChange={(e) => {
+            setMinNetIncome(e.target.value);
+          }}
+        />
+        <input
+          type="number"
+          placeholder="Maximum Net Income"
+          className="mt-10"
+          value={maxNetIncome}
+          onChange={(e) => {
+            setMaxNetIncome(e.target.value);
+          }}
+        />
+        <input
+          type="number"
+          placeholder="Minimum Year"
+          className="mt-10"
+          value={minYear}
+          onChange={(e) => {
+            setMinYear(e.target.value);
+          }}
+        />
+
+        <input
+          type="number"
+          placeholder="Maximum Year"
+          className="mt-10"
+          value={maxYear}
+          onChange={(e) => {
+            setMaxYear(e.target.value);
+          }}
+        />
+
         <button
           type="button"
           onClick={() => {

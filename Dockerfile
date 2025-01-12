@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy FastAPI backend
 COPY fetch.py .
-COPY .env .
+# COPY .env .
 
 # Copy built frontend from previous stage
 COPY --from=frontend-build /app/frontend/dist ./frontend/dist

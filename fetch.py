@@ -39,18 +39,15 @@ def handle_data(
     minYear: float | None = float("-inf"),
     maxYear: float | None = float("inf"),
 ):
-    print(f"this minRev{minRevenue}", f"this is maxRev{maxRevenue}")
-    finModelAPIEND = os.environ["FIN_MODEL_PREP_API_ENDPOINT"]
 
     fetch = requests.get(endpointFinModel)
-    elm = open("elements.json", "r")
-    readingElm = elm.read()
-    jsonElm = json.loads(readingElm)
-    elm.close()
+    # elm = open("elements.json", "r")
+    # readingElm = elm.read()
+    # jsonElm = json.loads(readingElm)
+    # elm.close()
 
-    elements = jsonElm
-
-    # elements= fetch.json()
+    # elements = jsonElm
+    elements = fetch.json()
     # s = open("elements.json",'w')
     # s.write(str(elements))
     # s.close()
@@ -75,7 +72,7 @@ def handle_data(
                 date_object = datetime.strptime(date_string, "%Y-%m-%d")
                 year = date_object.year
 
-                print(year)
+                # print(year)
 
                 data["year"] = year
             try:
@@ -85,20 +82,14 @@ def handle_data(
                 print("This is ", elements)
                 print(f"Error accessing element with key '{key}': {e}")
 
-        # Handle the error appropriately, possibly by assigning a default value or logging the issue.
-
-        # data[key] = element[key]
-
         statements.append(data)
-
-    # minRev = 274_515_000_001
-    # maxRev =  391_034_999_999
 
     filtered_statements = [
         statement
         for statement in statements
         if statement["revenue"] > minRevenue and statement["revenue"] < maxRevenue
     ]
+
     filtered_statements = [
         statement
         for statement in filtered_statements

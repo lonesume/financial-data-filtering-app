@@ -57,13 +57,6 @@ export default function DemoPage() {
       });
   }, []);
 
-  // console.log(
-  //   "this is the minRev:",
-  //   minRevenue,
-  //   "this is the maxRev:",
-  //   maxRevenue
-  // );
-
   return (
     <div className="container mx-auto p-4 md:p-10">
       <div>

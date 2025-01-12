@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.requests import Request
-load_dotenv()
+load_dotenv(override=True)
 
 finModelAPIKey= os.environ['FIN_MODEL_PREP_API']
 
@@ -48,6 +48,7 @@ def handle_data():
             except TypeError as e:
                 print("This is ",elements)
                 print(f"Error accessing element with key '{key}': {e}")
+            
     # Handle the error appropriately, possibly by assigning a default value or logging the issue.
 
             # data[key] = element[key]
